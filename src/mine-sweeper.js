@@ -23,9 +23,46 @@ const { NotImplementedError } = require('../extensions/index.js');
  *  [1, 1, 1]
  * ]
  */
-function minesweeper(/* matrix */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
+
+
+
+
+
+
+//  В популярной игре «Сапер» у вас есть доска с минами и клетками  которые не содержат мин, имеют число, обозначающее общее количество мин в соседних ячейках. Начнём с расстановки мин мы хотим создать настройку игры «Сапер».
+
+function minesweeper(matrix ) {
+  const result = [];
+
+  if (matrix.length === 0 || matrix[0].length === 0) return [];
+  
+  // abscissa
+  for (let abscCnt = 0; abscCnt < matrix.length; abscCnt++) {
+    const arr = [];
+    result.push(arr);
+
+    // ordinate
+    for (let ordCnt = 0; ordCnt < matrix[0].length; ordCnt++) {
+      let count = 0;
+      for (let x = abscCnt - 1; x <= abscCnt + 1; x++) {
+
+        for (let y = ordCnt - 1; y <= ordCnt + 1; y++) {
+          if (x >= 0 && y >= 0 && x < matrix.length && 
+              y < matrix[0].length && !(x == abscCnt && y == ordCnt)) {
+
+            if (matrix[x][y] == true) {
+              count += 1;
+            } else count += 0;
+            
+          }
+        }
+
+      }
+      result[abscCnt].push(count);
+    }
+  }
+
+  return result;
 }
 
 module.exports = {
